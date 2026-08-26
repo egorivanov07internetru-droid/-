@@ -1,355 +1,620 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GalaxCri — Messenger</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GalaxCri</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#060814;
+    --card:#101525;
+    --card2:#151c30;
+    --border:#ffffff12;
+    --text:#ffffff;
+    --muted:#929bb5;
+    --purple:#795cff;
+    --blue:#20d8ff;
+}
+
+body{
+    min-height:100vh;
+    font-family:Inter,Arial,sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 15% 10%,#704cff44,transparent 35%),
+        radial-gradient(circle at 85% 85%,#00d9ff2e,transparent 35%),
+        var(--bg);
+    overflow:hidden;
+}
+
+/* Звёзды */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.35;
+    background-image:
+        radial-gradient(#fff 1px,transparent 1px),
+        radial-gradient(#fff 1px,transparent 1px);
+    background-size:75px 75px,120px 120px;
+    background-position:0 0,40px 60px;
+}
+
+/* Навигация */
+
+header{
+    position:relative;
+    z-index:2;
+
+    height:76px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+
+    border-bottom:1px solid var(--border);
+
+    background:#080b17cc;
+    backdrop-filter:blur(20px);
+}
+
+.logoBox{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:23px;
+    font-weight:900;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(135deg,var(--purple),var(--blue));
+
+    box-shadow:
+        0 8px 35px #6955ff66;
+
+    font-size:23px;
+}
+
+.headerButtons{
+    display:flex;
+    gap:9px;
+}
+
+button{
+    border:0;
+    color:white;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:750;
+    transition:.2s;
+}
+
+.loginButton{
+    padding:11px 18px;
+
+    border-radius:12px;
+
+    background:#ffffff09;
+    border:1px solid #ffffff15;
+}
+
+.loginButton:hover{
+    background:#ffffff15;
+    transform:translateY(-2px);
+}
+
+.registerButton{
+    padding:11px 18px;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(135deg,var(--purple),var(--blue));
+
+    box-shadow:
+        0 8px 30px #6955ff44;
+}
+
+.registerButton:hover{
+    transform:translateY(-2px) scale(1.03);
+}
+
+/* Главная */
+
+main{
+    position:relative;
+    z-index:1;
+
+    height:calc(100vh - 76px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:30px 20px;
+
+    overflow:auto;
+}
+
+.hero{
+    width:min(1000px,100%);
+    text-align:center;
+
+    animation:heroIn .7s ease;
+}
+
+@keyframes heroIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
     }
 
-    body {
-      min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
-      color: white;
-      background:
-        radial-gradient(circle at 20% 20%, #5b35ff55, transparent 35%),
-        radial-gradient(circle at 80% 80%, #00c8ff33, transparent 35%),
-        #070914;
-      overflow-x: hidden;
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.badge{
+    display:inline-flex;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    background:#ffffff08;
+    border:1px solid #ffffff12;
+
+    color:#aaa4ff;
+
+    font-size:13px;
+
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:clamp(55px,9vw,100px);
+
+    line-height:.9;
+
+    letter-spacing:-5px;
+
+    margin-bottom:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #aaa4ff 45%,
+            #62eaff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.description{
+    max-width:650px;
+
+    margin:auto;
+
+    color:var(--muted);
+
+    font-size:18px;
+
+    line-height:1.65;
+}
+
+.mainButtons{
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    margin-top:32px;
+
+    flex-wrap:wrap;
+}
+
+.bigButton{
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    font-size:15px;
+}
+
+.primary{
+    background:
+        linear-gradient(135deg,var(--purple),var(--blue));
+
+    box-shadow:
+        0 12px 40px #6655ff44;
+}
+
+.secondary{
+    background:#ffffff09;
+    border:1px solid #ffffff15;
+}
+
+.bigButton:hover{
+    transform:translateY(-3px);
+}
+
+/* Возможности */
+
+.features{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+    margin-top:55px;
+}
+
+.feature{
+    text-align:left;
+
+    padding:20px;
+
+    border-radius:19px;
+
+    background:#ffffff07;
+
+    border:1px solid #ffffff0d;
+
+    backdrop-filter:blur(15px);
+
+    transition:.25s;
+}
+
+.feature:hover{
+    transform:translateY(-5px);
+
+    background:#ffffff0c;
+
+    border-color:#ffffff1c;
+}
+
+.icon{
+    font-size:27px;
+
+    margin-bottom:12px;
+}
+
+.feature h3{
+    margin-bottom:7px;
+}
+
+.feature p{
+    color:#858fa9;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+.version{
+    color:#515b75;
+
+    font-size:11px;
+
+    margin-top:25px;
+}
+
+/* Модальное окно */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    z-index:10;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:#000000aa;
+
+    backdrop-filter:blur(15px);
+}
+
+.modal.active{
+    display:flex;
+
+    animation:fade .2s ease;
+}
+
+@keyframes fade{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.modalCard{
+    width:min(470px,100%);
+
+    padding:30px;
+
+    border-radius:26px;
+
+    background:#111729;
+
+    border:1px solid #ffffff16;
+
+    box-shadow:
+        0 30px 100px #000000aa;
+
+    animation:modalIn .3s ease;
+}
+
+@keyframes modalIn{
+    from{
+        transform:scale(.93) translateY(15px);
+        opacity:0;
     }
 
-    .stars {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(#ffffff55 1px, transparent 1px),
-        radial-gradient(#ffffff33 1px, transparent 1px);
-      background-size: 70px 70px, 110px 110px;
-      background-position: 0 0, 35px 50px;
-      opacity: .35;
+    to{
+        transform:scale(1) translateY(0);
+        opacity:1;
+    }
+}
+
+.modalTop{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+.modalTitle{
+    font-size:27px;
+    font-weight:850;
+}
+
+.close{
+    width:34px;
+    height:34px;
+
+    border-radius:10px;
+
+    background:#ffffff0a;
+
+    font-size:20px;
+}
+
+.modalDescription{
+    color:var(--muted);
+
+    font-size:14px;
+
+    line-height:1.55;
+
+    margin-bottom:20px;
+}
+
+/* Переключатель */
+
+.methodSwitch{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:5px;
+
+    padding:5px;
+
+    margin-bottom:15px;
+
+    border-radius:14px;
+
+    background:#080d1b;
+}
+
+.method{
+    padding:11px;
+
+    border-radius:10px;
+
+    background:transparent;
+
+    color:#78839f;
+}
+
+.method.active{
+    background:#202744;
+    color:white;
+}
+
+/* Поля */
+
+.field{
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:10px;
+
+    border-radius:13px;
+
+    border:1px solid #ffffff12;
+
+    outline:none;
+
+    background:#080d1b;
+
+    color:white;
+
+    font-size:14px;
+}
+
+.field:focus{
+    border-color:#765cff;
+
+    box-shadow:
+        0 0 0 3px #765cff22;
+}
+
+.field::placeholder{
+    color:#59637e;
+}
+
+.passwordWrap{
+    position:relative;
+}
+
+.showPassword{
+    position:absolute;
+
+    right:7px;
+    top:7px;
+
+    height:40px;
+
+    padding:0 10px;
+
+    background:#ffffff08;
+
+    border-radius:9px;
+
+    color:#8993ad;
+
+    font-size:12px;
+}
+
+/* Основная кнопка */
+
+.submit{
+    width:100%;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    margin-top:4px;
+
+    background:
+        linear-gradient(135deg,var(--purple),var(--blue));
+
+    box-shadow:
+        0 10px 30px #6655ff33;
+}
+
+.submit:hover{
+    transform:translateY(-2px);
+}
+
+.bottomText{
+    text-align:center;
+
+    color:#7f89a4;
+
+    font-size:13px;
+
+    margin-top:15px;
+}
+
+.link{
+    color:#9484ff;
+
+    cursor:pointer;
+}
+
+.error{
+    min-height:18px;
+
+    color:#ff6d8a;
+
+    font-size:12px;
+
+    margin-bottom:5px;
+}
+
+@media(max-width:800px){
+
+    header{
+        padding:0 18px;
     }
 
-    header {
-      position: relative;
-      z-index: 2;
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 7%;
-      border-bottom: 1px solid #ffffff12;
-      background: #080a16aa;
-      backdrop-filter: blur(20px);
+    .features{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:560px){
+
+    body{
+        overflow:auto;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 23px;
-      font-weight: 900;
+    header{
+        height:68px;
     }
 
-    .logo {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #795cff, #20d8ff);
-      box-shadow: 0 0 35px #6d5cff77;
-      font-size: 23px;
+    main{
+        min-height:calc(100vh - 68px);
+        height:auto;
+        padding:55px 15px;
     }
 
-    .header-buttons {
-      display: flex;
-      gap: 10px;
+    .headerButtons .loginButton{
+        display:none;
     }
 
-    button {
-      border: 0;
-      color: white;
-      cursor: pointer;
-      font-weight: 700;
-      transition: .25s;
+    h1{
+        font-size:64px;
+        letter-spacing:-3px;
     }
 
-    .login {
-      padding: 11px 18px;
-      border-radius: 12px;
-      background: #ffffff0d;
-      border: 1px solid #ffffff18;
+    .description{
+        font-size:15px;
     }
 
-    .login:hover {
-      background: #ffffff18;
-      transform: translateY(-2px);
+    .features{
+        grid-template-columns:1fr;
+        margin-top:45px;
     }
 
-    .register {
-      padding: 11px 18px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #795cff, #20bfff);
-      box-shadow: 0 8px 30px #6355ff44;
+    .feature{
+        text-align:center;
     }
 
-    .register:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 12px 40px #6355ff66;
+    .modalCard{
+        padding:23px;
     }
-
-    main {
-      position: relative;
-      z-index: 1;
-      min-height: calc(100vh - 76px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 70px 20px;
-    }
-
-    .hero {
-      width: min(1050px, 100%);
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      padding: 8px 14px;
-      border-radius: 30px;
-      border: 1px solid #ffffff18;
-      background: #ffffff0b;
-      color: #b8b4ff;
-      margin-bottom: 22px;
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      font-size: clamp(48px, 8vw, 92px);
-      line-height: .95;
-      letter-spacing: -4px;
-      margin-bottom: 25px;
-      background: linear-gradient(135deg, #ffffff, #a9a4ff 45%, #5eeaff);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .subtitle {
-      max-width: 680px;
-      margin: auto;
-      color: #9ba4c0;
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 35px;
-      flex-wrap: wrap;
-    }
-
-    .big-button {
-      padding: 15px 25px;
-      border-radius: 15px;
-      font-size: 16px;
-    }
-
-    .primary {
-      background: linear-gradient(135deg, #795cff, #20cfff);
-      box-shadow: 0 12px 40px #6655ff55;
-    }
-
-    .secondary {
-      background: #ffffff0b;
-      border: 1px solid #ffffff15;
-    }
-
-    .big-button:hover {
-      transform: translateY(-3px);
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 70px;
-    }
-
-    .feature {
-      padding: 23px;
-      text-align: left;
-      border-radius: 20px;
-      background: #ffffff08;
-      border: 1px solid #ffffff10;
-      backdrop-filter: blur(18px);
-      transition: .25s;
-    }
-
-    .feature:hover {
-      transform: translateY(-6px);
-      background: #ffffff0d;
-      border-color: #ffffff20;
-    }
-
-    .feature-icon {
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-
-    .feature h3 {
-      margin-bottom: 8px;
-    }
-
-    .feature p {
-      color: #8992ae;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .version {
-      margin-top: 35px;
-      color: #58627e;
-      font-size: 12px;
-    }
-
-    /* MODAL */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: #00000099;
-      backdrop-filter: blur(15px);
-    }
-
-    .modal.show {
-      display: grid;
-      animation: fade .25s ease;
-    }
-
-    @keyframes fade {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    .modal-card {
-      width: min(440px, 100%);
-      padding: 30px;
-      border-radius: 25px;
-      background: #111525;
-      border: 1px solid #ffffff16;
-      box-shadow: 0 30px 100px #00000099;
-      animation: popup .3s ease;
-    }
-
-    @keyframes popup {
-      from {
-        transform: scale(.9) translateY(20px);
-      }
-      to {
-        transform: scale(1) translateY(0);
-      }
-    }
-
-    .modal-card h2 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    .modal-card p {
-      color: #8992ae;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 10px;
-      border-radius: 13px;
-      outline: none;
-      border: 1px solid #ffffff12;
-      background: #080c18;
-      color: white;
-    }
-
-    .input:focus {
-      border-color: #725cff;
-      box-shadow: 0 0 0 3px #725cff22;
-    }
-
-    .modal-submit {
-      width: 100%;
-      padding: 14px;
-      border-radius: 13px;
-      margin-top: 5px;
-      background: linear-gradient(135deg, #795cff, #20cfff);
-    }
-
-    .close {
-      float: right;
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: #ffffff0b;
-      font-size: 18px;
-    }
-
-    .switch {
-      margin-top: 16px;
-      text-align: center;
-      color: #8992ae;
-      font-size: 13px;
-    }
-
-    .switch span {
-      color: #8d7cff;
-      cursor: pointer;
-    }
-
-    @media(max-width: 800px) {
-      header {
-        padding: 0 18px;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(max-width: 520px) {
-      .header-buttons .login {
-        display: none;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-
-      .subtitle {
-        font-size: 16px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
@@ -357,302 +622,18 @@
 <div class="stars"></div>
 
 <header>
-  <div class="brand">
-    <div class="logo">✦</div>
-    GalaxCri
-  </div>
 
-  <div class="header-buttons">
-    <button class="login" onclick="openLogin()">Войти</button>
-    <button class="register" onclick="openRegister()">Регистрация</button>
-  </div>
-</header>
-
-<main>
-  <section class="hero">
-
-    <div class="badge">
-      ✦ Новый способ общаться
+    <div class="logoBox">
+        <div class="logo">✦</div>
+        GalaxCri
     </div>
 
-    <h1>GalaxCri</h1>
-
-    <p class="subtitle">
-      Современный мессенджер для общения, звонков,
-      групп, каналов и друзей. Всё необходимое —
-      в одном красивом пространстве.
-    </p>
-
-    <div class="hero-buttons">
-      <button class="big-button primary" onclick="openRegister()">
-        🚀 Создать аккаунт
-      </button>
-
-      <button class="big-button secondary" onclick="openLogin()">
-        🔐 Войти
-      </button>
-    </div>
-
-    <div class="features">
-
-      <div class="feature">
-        <div class="feature-icon">💬</div>
-        <h3>Чаты</h3>
-        <p>
-          Личные сообщения, группы,
-          реакции, ответы и пересылка.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">👥</div>
-        <h3>Контакты</h3>
-        <p>
-          Находи друзей по номеру,
-          почте или username.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">📢</div>
-        <h3>Каналы</h3>
-        <p>
-          Создавай собственные каналы
-          и сообщества.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🔒</div>
-        <h3>Безопасность</h3>
-        <p>
-          Настройки приватности и
-          контроль доступа к аккаунту.
-        </p>
-      </div>
-
-    </div>
-
-    <div class="version">
-      GalaxCri • Preview 1.0
-    </div>
-
-  </section>
-</main>
-
-
-<!-- LOGIN -->
-
-<div class="modal" id="loginModal">
-
-  <div class="modal-card">
-
-    <button class="close" onclick="closeModals()">×</button>
-
-    <h2>С возвращением 👋</h2>
-
-    <p>
-      Войди в свой аккаунт GalaxCri
-      по телефону или электронной почте.
-    </p>
-
-    <input
-      class="input"
-      id="loginIdentity"
-      placeholder="Телефон или электронная почта"
-    >
-
-    <input
-      class="input"
-      id="loginPassword"
-      type="password"
-      placeholder="Пароль"
-    >
-
-    <button
-      class="modal-submit"
-      onclick="login()">
-      Войти в GalaxCri
-    </button>
-
-    <div class="switch">
-      Нет аккаунта?
-      <span onclick="switchToRegister()">Создать</span>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- REGISTER -->
-
-<div class="modal" id="registerModal">
-
-  <div class="modal-card">
-
-    <button class="close" onclick="closeModals()">×</button>
-
-    <h2>Создать аккаунт 🚀</h2>
-
-    <p>
-      Зарегистрируйся с помощью номера телефона
-      или электронной почты.
-    </p>
-
-    <input
-      class="input"
-      id="registerIdentity"
-      placeholder="Телефон или электронная почта"
-    >
-
-    <input
-      class="input"
-      id="registerUsername"
-      placeholder="@username"
-    >
-
-    <input
-      class="input"
-      id="registerPassword"
-      type="password"
-      placeholder="Придумай пароль"
-    >
-
-    <button
-      class="modal-submit"
-      onclick="register()">
-      Продолжить
-    </button>
-
-    <div class="switch">
-      Уже есть аккаунт?
-      <span onclick="switchToLogin()">Войти</span>
-    </div>
-
-  </div>
-
-</div>
-
-
-<script>
-
-  const loginModal = document.getElementById("loginModal");
-  const registerModal = document.getElementById("registerModal");
-
-  function openLogin() {
-    registerModal.classList.remove("show");
-    loginModal.classList.add("show");
-  }
-
-  function openRegister() {
-    loginModal.classList.remove("show");
-    registerModal.classList.add("show");
-  }
-
-  function closeModals() {
-    loginModal.classList.remove("show");
-    registerModal.classList.remove("show");
-  }
-
-  function switchToRegister() {
-    closeModals();
-    openRegister();
-  }
-
-  function switchToLogin() {
-    closeModals();
-    openLogin();
-  }
-
-  function register() {
-
-    const identity =
-      document.getElementById("registerIdentity").value.trim();
-
-    const username =
-      document.getElementById("registerUsername").value.trim();
-
-    const password =
-      document.getElementById("registerPassword").value;
-
-    if (!identity || !username || !password) {
-      alert("Заполни все поля.");
-      return;
-    }
-
-    const user = {
-      identity,
-      username,
-      created: Date.now()
-    };
-
-    localStorage.setItem(
-      "galaxcri_user",
-      JSON.stringify(user)
-    );
-
-    localStorage.setItem(
-      "galaxcri_logged",
-      "true"
-    );
-
-    alert(
-      "Аккаунт создан! Следующий этап — правила GalaxCri."
-    );
-
-    closeModals();
-
-    window.location.href = "rules.html";
-  }
-
-  function login() {
-
-    const identity =
-      document.getElementById("loginIdentity").value.trim();
-
-    const password =
-      document.getElementById("loginPassword").value;
-
-    if (!identity || !password) {
-      alert("Введи телефон/почту и пароль.");
-      return;
-    }
-
-    const saved =
-      JSON.parse(localStorage.getItem("galaxcri_user"));
-
-    if (!saved) {
-      alert(
-        "Аккаунт пока не найден. Сначала зарегистрируйся."
-      );
-      return;
-    }
-
-    if (saved.identity !== identity) {
-      alert(
-        "Такой аккаунт не найден на этом устройстве."
-      );
-      return;
-    }
-
-    localStorage.setItem(
-      "galaxcri_logged",
-      "true"
-    );
-
-    window.location.href = "app.html";
-  }
-
-  loginModal.addEventListener("click", e => {
-    if (e.target === loginModal) closeModals();
-  });
-
-  registerModal.addEventListener("click", e => {
-    if (e.target === registerModal) closeModals();
-  });
-
-</script>
-
-</body>
-</html>
+    <div class="headerButtons">
+
+        <button
+            class="loginButton"
+            onclick="openLogin()">
+            Войти
+        </button>
+
+        <button
