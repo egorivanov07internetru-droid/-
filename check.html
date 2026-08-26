@@ -1,1 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+<title>GalaxCri — Проверка</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    font-family:Arial,Inter,sans-serif;
+    color:white;
+
+    background:#03050e;
+
+    overflow:hidden;
+}
+
+/* =========================
+   SPACE
+========================= */
+
+.space{
+    position:fixed;
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+}
+
+.stars{
+    position:absolute;
+    inset:-50%;
+
+    background-image:
+        radial-gradient(#fff 1px,transparent 1px),
+        radial-gradient(#ffffffaa 1px,transparent 1px),
+        radial-gradient(#ffffff55 1px,transparent 1px);
+
+    background-size:
+        75px 75px,
+        130px 130px,
+        200px 200px;
+
+    animation:stars 45s linear infinite;
+}
+
+@keyframes stars{
+    to{
+        transform:translate(180px,220px);
+    }
+}
+
+.nebula{
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    opacity:.2;
+}
+
+.n1{
+    left:-300px;
+    top:-250px;
+
+    background:#7455ff;
+
+    animation:n1 12s infinite alternate ease-in-out;
+}
+
+.n2{
+    right:-300px;
+    bottom:-300px;
+
+    background:#00d9ff;
+
+    animation:n2 15s infinite alternate ease-in-out;
+}
+
+@keyframes n1{
+    to{
+        transform:translate(130px,100px) scale(1.2);
+    }
+}
+
+@keyframes n2{
+    to{
+        transform:translate(-130px,-100px) scale(1.2);
+    }
+}
+
+/* =========================
+   FLOATING EMOJIS
+========================= */
+
+.emoji{
+    position:fixed;
+
+    font-size:38px;
+
+    pointer-events:none;
+
+    filter:drop-shadow(0 0 15px #ffffff55);
+}
+
+.e1{
+    left:7%;
+    top:20%;
+
+    animation:e1 8s infinite ease-in-out;
+}
+
+.e2{
+    right:7%;
+    top:25%;
+
+    animation:e2 10s infinite ease-in-out;
+}
+
+.e3{
+    left:12%;
+    bottom:15%;
+
+    animation:e3 9s infinite ease-in-out;
+}
+
+.e4{
+    right:12%;
+    bottom:18%;
+
+    animation:e4 11s infinite ease-in-out;
+}
+
+.e5{
+    left:45%;
+    top:8%;
+
+    animation:e5 7s infinite ease-in-out;
+}
+
+@keyframes e1{
+    50%{
+        transform:translate(90px,-50px) rotate(20deg);
+    }
+}
+
+@keyframes e2{
+    50%{
+        transform:translate(-100px,70px) rotate(-20deg);
+    }
+}
+
+@keyframes e3{
+    50%{
+        transform:translate(90px,-60px) rotate(15deg);
+    }
+}
+
+@keyframes e4{
+    50%{
+        transform:translate(-90px,-70px) rotate(-20deg);
+    }
+}
+
+@keyframes e5{
+    50%{
+        transform:translateY(80px) rotate(180deg);
+    }
+}
+
+/* =========================
+   CARD
+========================= */
+
+.container{
+    position:relative;
+    z-index:5;
+
+    width:min(500px,100%);
+
+    animation:appear .7s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(35px) scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.card{
+    padding:32px;
+
+    border-radius:28px;
+
+    background:#0d1324dd;
+
+    border:1px solid #ffffff16;
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 35px 100px #000,
+        0 0 80px #705cff18;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.logo{
+    width:58px;
+    height:58px;
+
+    display:grid;
+    place-items:center;
+
+    margin:0 auto 18px;
+
+    border-radius:18px;
+
+    font-size:28px;
+
+    background:
+        linear-gradient(135deg,#795cff,#20d8ff);
+
+    box-shadow:
+        0 0 40px #795cff55;
+
+    animation:logo 3s infinite ease-in-out;
+}
+
+@keyframes logo{
+    50%{
+        transform:rotate(6deg) scale(1.05);
+    }
+}
+
+h1{
+    text-align:center;
+
+    font-size:29px;
+
+    margin-bottom:9px;
+}
+
+.subtitle{
+    text-align:center;
+
+    color:#8994ae;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    margin-bottom:28px;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress{
+    display:flex;
+
+    align-items:center;
+
+    margin-bottom:28px;
+}
+
+.step{
+    width:32px;
+    height:32px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:50%;
+
+    font-size:13px;
+    font-weight:bold;
+
+    background:#1a2136;
+
+    color:#707b96;
+
+    border:1px solid #ffffff12;
+}
+
+.step.active{
+    color:white;
+
+    background:
+        linear-gradient(135deg,#795cff,#20d8ff);
+
+    box-shadow:
+        0 0 20px #795cff55;
+}
+
+.line{
+    flex:1;
+
+    height:2px;
+
+    background:#ffffff12;
+}
+
+/* =========================
+   ACCOUNT
+========================= */
+
+.account{
+    padding:17px;
+
+    border-radius:18px;
+
+    background:#070b17;
+
+    border:1px solid #ffffff0e;
+
+    margin-bottom:20px;
+}
+
+.accountTitle{
+    color:#7f8aa5;
+
+    font-size:12px;
+
+    margin-bottom:8px;
+}
+
+.username{
+    font-size:20px;
+
+    font-weight:800;
+}
+
+.warning{
+    display:none;
+
+    padding:12px;
+
+    margin-bottom:15px;
+
+    border-radius:13px;
+
+    background:#ffb02012;
+
+    border:1px solid #ffb02025;
+
+    color:#ffc968;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+label{
+    display:block;
+
+    color:#aab3c8;
+
+    font-size:13px;
+
+    margin-bottom:7px;
+}
+
+.input{
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:14px;
+
+    border-radius:13px;
+
+    border:1px solid #ffffff12;
+
+    outline:none;
+
+    background:#070b17;
+
+    color:white;
+
+    font-size:15px;
+
+    transition:.25s;
+}
+
+.input:focus{
+    border-color:#795cff;
+
+    box-shadow:
+        0 0 0 3px #795cff20;
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.agree{
+    display:flex;
+
+    gap:10px;
+
+    align-items:flex-start;
+
+    margin:5px 0 18px;
+
+    color:#8994ae;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+.agree input{
+    margin-top:3px;
+
+    accent-color:#795cff;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.continue{
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(135deg,#795cff,#20d8ff);
+
+    box-shadow:
+        0 12px 35px #795cff33;
+
+    transition:.25s;
+}
+
+.continue:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 18px 45px #795cff55;
+}
+
+.continue:active{
+    transform:scale(.98);
+}
+
+/* =========================
+   GOOGLE
+========================= */
+
+.google{
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    border-radius:14px;
+
+    border:1px solid #ffffff14;
+
+    background:#ffffff;
+
+    color:#111;
+
+    font-weight:750;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.google:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   BOTTOM
+========================= */
+
+.back{
+    display:block;
+
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#747f99;
+
+    font-size:13px;
+
+    cursor:pointer;
+}
+
+.back:hover{
+    color:#a99cff;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:28px;
+
+    background:#0a0f20ee;
+
+    backdrop-filter:blur(10px);
+}
+
+.loading.active{
+    display:flex;
+}
+
+.loader{
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    border:4px solid #ffffff15;
+
+    border-top-color:#795cff;
+
+    border-right-color:#20d8ff;
+
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:500px){
+
+    .card{
+        padding:24px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+
+    .emoji{
+        font-size:30px;
+        opacity:.6;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SPACE -->
+
+<div class="space">
+
+    <div class="stars"></div>
+
+    <div class="nebula n1"></div>
+    <div class="nebula n2"></div>
+
+    <div class="emoji e1">🚀</div>
+    <div class="emoji e2">🪐</div>
+    <div class="emoji e3">✨</div>
+    <div class="emoji e4">☄️</div>
+    <div class="emoji e5">🌌</div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="logo">
+            ✦
+        </div>
+
+        <h1>
+            Проверка GalaxCri
+        </h1>
+
+        <p class="subtitle">
+            🔐 Проверь данные своего нового
+            аккаунта перед продолжением.
+        </p>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress">
+
+            <div class="step active">
+                1
+            </div>
+
+            <div class="line"></div>
+
+            <div class="step">
+                2
+            </div>
+
+            <div class="line"></div>
+
+            <div class="step">
+                3
+            </div>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="account">
+
+            <div class="accountTitle">
+                СОЗДАВАЕМЫЙ АККАУНТ
+            </div>
+
+            <div
+                class="username"
+                id="username">
+
+                Загрузка...
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="warning"
+            id="warning">
+
+            ⚠️ Не удалось найти данные
+            регистрации. Вернись на главную
+            страницу и попробуй ещё раз.
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <label for="password">
+            🔐 Подтвердите пароль GalaxCri
+        </label>
+
+        <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="Введите пароль">
+
+
+        <!-- AGREEMENT -->
+
+        <label class="agree">
+
+            <input
+                type="checkbox"
+                id="confirm">
+
+            <span>
+                Я подтверждаю, что указанные
+                данные принадлежат мне и хочу
+                продолжить регистрацию GalaxCri.
+            </span>
+
+        </label>
+
+
+        <!-- CONTINUE -->
+
+        <button
+            class="continue"
+            onclick="continueRegistration()">
+
+            🚀 Проверить и продолжить
+
+        </button>
+
+
+        <!-- GOOGLE -->
+
+        <button
+            class="google"
+            onclick="googleAuth()">
+
+            🇬 Продолжить с Google
+
+        </button>
+
+
+        <div
+            class="back"
+            onclick="goBack()">
+
+            ← Вернуться на главную
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div
+            class="loading"
+            id="loading">
+
+            <div class="loader"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   LOAD REGISTRATION DATA
+========================================= */
+
+const raw =
+    localStorage.getItem(
+        "galaxcri_pending_account"
+    );
+
+let account = null;
+
+
+if(raw){
+
+    try{
+
+        account = JSON.parse(raw);
+
+    }catch(error){
+
+        account = null;
+
+    }
+
+}
+
+
+const usernameElement =
+    document.getElementById("username");
+
+const warningElement =
+    document.getElementById("warning");
+
+
+if(account && account.username){
+
+    usernameElement.textContent =
+        account.username;
+
+}else{
+
+    usernameElement.textContent =
+        "Аккаунт не найден";
+
+    warningElement.style.display =
+        "block";
+
+}
+
+
+/* =========================================
+   CONTINUE
+========================================= */
+
+function continueRegistration(){
+
+    if(!account){
+
+        alert(
+            "⚠️ Данные регистрации не найдены."
+        );
+
+        return;
+
+    }
+
+
+    const password =
+        document
+            .getElementById("password")
+            .value;
+
+
+    const confirmed =
+        document
+            .getElementById("confirm")
+            .checked;
+
+
+    if(!password){
+
+        alert(
+            "🔐 Введи пароль."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       В прототипе сравниваем пароль
+       с тем, который был введён
+       на index.html.
+    */
+
+    if(password !== account.password){
+
+        alert(
+            "❌ Пароль не совпадает."
+        );
+
+        return;
+
+    }
+
+
+    if(!confirmed){
+
+        alert(
+            "☑️ Подтверди данные перед продолжением."
+        );
+
+        return;
+
+    }
+
+
+    /* LOADING */
+
+    document
+        .getElementById("loading")
+        .classList.add("active");
+
+
+    /*
+       Сохраняем аккаунт.
+
+       ВАЖНО:
+       Это только прототип.
+       В настоящем приложении пароль
+       нельзя хранить в localStorage.
+    */
+
+    const savedAccount = {
+
+        username:account.username,
+
+        password:account.password,
+
+        created:account.created || Date.now()
+
+    };
+
+
+    localStorage.setItem(
+        "galaxcri_account",
+        JSON.stringify(savedAccount)
+    );
+
+
+    localStorage.removeItem(
+        "galaxcri_pending_account"
+    );
+
+
+    /*
+       Следующий этап:
+
+       check.html
+           ↓
+       rules.html
+    */
+
+    setTimeout(()=>{
+
+        window.location.href =
+            "rules.html";
+
+    },900);
+
+}
+
+
+/* =========================================
+   GOOGLE
+========================================= */
+
+function googleAuth(){
+
+    alert(
+        "🇬 Вход через Google подключим через официальный OAuth. Пароль Google или секретный ключ GalaxCri запрашивать не будет."
+    );
+
+}
+
+
+/* =========================================
+   BACK
+========================================= */
+
+function goBack(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =========================================
+   ENTER
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(event.key === "Enter"){
+
+            continueRegistration();
+
+        }
+
+        if(event.key === "Escape"){
+
+            goBack();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
