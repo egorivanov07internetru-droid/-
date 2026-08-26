@@ -2,539 +2,1073 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Правила — GalaxCri</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GalaxCri — Правила</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  min-height:100vh;
-  font-family:Inter,Arial,sans-serif;
-  color:#fff;
-  background:
-    radial-gradient(circle at 15% 10%,#684cff55,transparent 35%),
-    radial-gradient(circle at 85% 90%,#00d9ff33,transparent 35%),
-    #070914;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+    min-height:100vh;
+    font-family:Inter,Arial,sans-serif;
+    color:#fff;
+    background:#050713;
+    overflow-x:hidden;
+}
+
+/* =========================
+   КОСМОС
+========================= */
+
+.space{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
 }
 
 .stars{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    radial-gradient(#ffffff55 1px,transparent 1px),
-    radial-gradient(#ffffff33 1px,transparent 1px);
-  background-size:70px 70px,110px 110px;
-  background-position:0 0,35px 50px;
-  opacity:.3;
+    position:absolute;
+    inset:-50%;
+    background-image:
+        radial-gradient(#fff 1px,transparent 1px),
+        radial-gradient(#ffffffaa 1px,transparent 1px),
+        radial-gradient(#ffffff66 1px,transparent 1px);
+    background-size:
+        80px 80px,
+        130px 130px,
+        190px 190px;
+    background-position:
+        0 0,
+        40px 60px,
+        100px 20px;
+
+    animation:stars 40s linear infinite;
 }
 
-.card{
-  position:relative;
-  width:min(700px,100%);
-  max-height:90vh;
-  overflow:hidden;
-
-  background:#111525dd;
-  border:1px solid #ffffff15;
-  border-radius:28px;
-
-  box-shadow:
-    0 30px 100px #00000099,
-    0 0 80px #6955ff22;
-
-  backdrop-filter:blur(25px);
-
-  animation:appear .45s ease;
+@keyframes stars{
+    to{
+        transform:translate(150px,200px);
+    }
 }
 
-@keyframes appear{
-  from{
-    opacity:0;
-    transform:translateY(25px) scale(.96);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
+.nebula{
+    position:absolute;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    filter:blur(110px);
+    opacity:.23;
 }
 
-.header{
-  padding:28px 30px 22px;
-  border-bottom:1px solid #ffffff10;
-  display:flex;
-  align-items:center;
-  gap:15px;
+.n1{
+    left:-300px;
+    top:-250px;
+    background:#795cff;
+    animation:n1 13s ease-in-out infinite alternate;
+}
+
+.n2{
+    right:-300px;
+    bottom:-300px;
+    background:#00d9ff;
+    animation:n2 16s ease-in-out infinite alternate;
+}
+
+.n3{
+    left:40%;
+    top:35%;
+    background:#ff45d0;
+    opacity:.08;
+    animation:n3 20s ease-in-out infinite alternate;
+}
+
+@keyframes n1{
+    to{
+        transform:translate(150px,100px) scale(1.2);
+    }
+}
+
+@keyframes n2{
+    to{
+        transform:translate(-130px,-100px) scale(1.2);
+    }
+}
+
+@keyframes n3{
+    to{
+        transform:scale(1.5);
+    }
+}
+
+/* =========================
+   ЛЕТАЮЩИЕ ЭМОДЖИ
+========================= */
+
+.emoji{
+    position:fixed;
+    z-index:1;
+    pointer-events:none;
+    user-select:none;
+    font-size:38px;
+    filter:drop-shadow(0 0 14px #ffffff66);
+}
+
+.e1{
+    left:5%;
+    top:17%;
+    animation:e1 8s ease-in-out infinite;
+}
+
+.e2{
+    right:6%;
+    top:25%;
+    animation:e2 10s ease-in-out infinite;
+}
+
+.e3{
+    left:10%;
+    top:65%;
+    animation:e3 11s ease-in-out infinite;
+}
+
+.e4{
+    right:11%;
+    top:70%;
+    animation:e4 9s ease-in-out infinite;
+}
+
+.e5{
+    left:46%;
+    top:10%;
+    animation:e5 7s ease-in-out infinite;
+}
+
+.e6{
+    right:30%;
+    top:48%;
+    animation:e6 12s ease-in-out infinite;
+}
+
+@keyframes e1{
+    50%{
+        transform:translate(100px,-50px) rotate(20deg);
+    }
+}
+
+@keyframes e2{
+    50%{
+        transform:translate(-100px,70px) rotate(-25deg);
+    }
+}
+
+@keyframes e3{
+    50%{
+        transform:translate(80px,-80px) rotate(20deg);
+    }
+}
+
+@keyframes e4{
+    50%{
+        transform:translate(-100px,-50px) rotate(-20deg);
+    }
+}
+
+@keyframes e5{
+    50%{
+        transform:translateY(100px) rotate(180deg);
+    }
+}
+
+@keyframes e6{
+    50%{
+        transform:translate(-80px,90px);
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:10;
+
+    height:74px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+
+    background:#070a17cc;
+    border-bottom:1px solid #ffffff12;
+
+    backdrop-filter:blur(20px);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    font-size:22px;
+    font-weight:900;
 }
 
 .logo{
-  width:50px;
-  height:50px;
+    width:43px;
+    height:43px;
 
-  display:grid;
-  place-items:center;
+    display:grid;
+    place-items:center;
 
-  border-radius:16px;
+    border-radius:14px;
 
-  background:
-    linear-gradient(135deg,#795cff,#20d8ff);
+    background:
+        linear-gradient(135deg,#795cff,#20d8ff);
 
-  font-size:25px;
+    box-shadow:
+        0 0 35px #735cff66;
 
-  box-shadow:
-    0 10px 35px #6755ff55;
+    animation:logo 3s ease-in-out infinite;
 }
 
-.header h1{
-  font-size:25px;
+@keyframes logo{
+    50%{
+        transform:rotate(6deg) scale(1.05);
+        box-shadow:0 0 55px #20d8ff66;
+    }
 }
 
-.header p{
-  color:#8992ad;
-  margin-top:4px;
-  font-size:13px;
+.back{
+    padding:10px 15px;
+
+    border-radius:12px;
+
+    background:#ffffff09;
+    border:1px solid #ffffff14;
+
+    color:#fff;
+
+    cursor:pointer;
 }
 
-.content{
-  padding:25px 30px;
-  max-height:55vh;
-  overflow-y:auto;
+/* =========================
+   MAIN
+========================= */
+
+main{
+    position:relative;
+    z-index:2;
+
+    width:min(850px,100%);
+
+    margin:auto;
+
+    padding:70px 20px 120px;
 }
 
-.content::-webkit-scrollbar{
-  width:7px;
+.hero{
+    text-align:center;
+
+    animation:appear .7s ease;
 }
 
-.content::-webkit-scrollbar-thumb{
-  background:#ffffff20;
-  border-radius:20px;
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.badge{
+    display:inline-block;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    background:#ffffff08;
+    border:1px solid #ffffff14;
+
+    color:#aaa3ff;
+
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:clamp(48px,8vw,80px);
+
+    letter-spacing:-4px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #aaa1ff,
+            #55eaff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    margin-bottom:18px;
+}
+
+.intro{
+    color:#929cb7;
+
+    line-height:1.7;
+
+    font-size:16px;
+
+    max-width:650px;
+
+    margin:auto;
+}
+
+/* =========================
+   ПРОГРЕСС
+========================= */
+
+.progressBox{
+    position:sticky;
+    top:94px;
+
+    z-index:5;
+
+    margin:35px 0 25px;
+
+    padding:14px 16px;
+
+    border-radius:16px;
+
+    background:#0c1120dd;
+
+    border:1px solid #ffffff12;
+
+    backdrop-filter:blur(20px);
+}
+
+.progressTop{
+    display:flex;
+    justify-content:space-between;
+
+    color:#8e98b2;
+
+    font-size:12px;
+
+    margin-bottom:9px;
+}
+
+.progress{
+    height:5px;
+
+    border-radius:10px;
+
+    background:#ffffff0c;
+
+    overflow:hidden;
+}
+
+.progressBar{
+    height:100%;
+
+    width:0%;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(90deg,#795cff,#20d8ff);
+
+    transition:.25s;
+}
+
+/* =========================
+   RULE CARDS
+========================= */
+
+.rules{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
 
 .rule{
-  padding:18px;
-  margin-bottom:12px;
+    padding:25px;
 
-  background:#ffffff06;
-  border:1px solid #ffffff0d;
+    border-radius:22px;
 
-  border-radius:17px;
+    background:#ffffff07;
 
-  transition:.2s;
+    border:1px solid #ffffff10;
+
+    backdrop-filter:blur(18px);
+
+    transition:.3s;
+
+    opacity:0;
+
+    transform:translateY(20px);
+}
+
+.rule.visible{
+    opacity:1;
+    transform:translateY(0);
 }
 
 .rule:hover{
-  background:#ffffff0a;
-  border-color:#ffffff18;
-  transform:translateX(3px);
+    transform:translateY(-4px);
+
+    background:#ffffff0b;
+
+    border-color:#ffffff22;
+
+    box-shadow:
+        0 20px 50px #00000044;
 }
 
-.rule-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
+.ruleIcon{
+    font-size:34px;
 
-  font-weight:800;
-  margin-bottom:7px;
+    margin-bottom:13px;
 }
 
-.number{
-  width:30px;
-  height:30px;
+.rule h2{
+    font-size:19px;
 
-  display:grid;
-  place-items:center;
-
-  border-radius:9px;
-
-  background:#725cff22;
-  color:#a99cff;
-
-  font-size:13px;
+    margin-bottom:9px;
 }
 
 .rule p{
-  color:#929bb5;
-  line-height:1.6;
-  font-size:14px;
+    color:#929cb6;
+
+    line-height:1.7;
+
+    font-size:14px;
 }
 
-.notice{
-  margin-top:18px;
+.warning{
+    border-color:#ffd34a22;
 
-  padding:15px;
-
-  border-radius:14px;
-
-  background:#725cff0d;
-  border:1px solid #725cff22;
-
-  color:#a9b0c7;
-
-  font-size:13px;
-  line-height:1.5;
+    background:#ffd34a07;
 }
 
-.footer{
-  padding:20px 30px 25px;
-  border-top:1px solid #ffffff10;
+/* =========================
+   AGREEMENT
+========================= */
+
+.agreement{
+    margin-top:25px;
+
+    padding:25px;
+
+    border-radius:22px;
+
+    background:#10172a;
+
+    border:1px solid #ffffff14;
+
+    text-align:center;
 }
 
-.checkbox{
-  display:flex;
-  gap:11px;
-  align-items:flex-start;
+.checkRow{
+    display:flex;
 
-  color:#9ba3ba;
+    align-items:center;
+    justify-content:center;
 
-  font-size:13px;
-  line-height:1.5;
+    gap:10px;
 
-  cursor:pointer;
+    color:#a6afc5;
+
+    font-size:14px;
+
+    cursor:pointer;
 }
 
-.checkbox input{
-  width:18px;
-  height:18px;
-  accent-color:#765cff;
-  margin-top:1px;
-  flex:none;
+.checkRow input{
+    width:19px;
+    height:19px;
+
+    accent-color:#795cff;
+
+    cursor:pointer;
 }
 
 .continue{
-  width:100%;
+    width:100%;
 
-  margin-top:16px;
+    padding:15px;
 
-  padding:14px;
+    margin-top:18px;
 
-  border:0;
-  border-radius:14px;
+    border:0;
 
-  color:white;
+    border-radius:14px;
 
-  font-size:15px;
-  font-weight:800;
+    color:#fff;
 
-  background:
-    linear-gradient(135deg,#795cff,#20cfff);
+    font-weight:800;
 
-  cursor:pointer;
+    font-size:15px;
 
-  box-shadow:
-    0 10px 30px #6655ff33;
+    background:
+        linear-gradient(
+            135deg,
+            #795cff,
+            #20d8ff
+        );
 
-  transition:.25s;
+    box-shadow:
+        0 10px 35px #6955ff33;
+
+    cursor:pointer;
+
+    transition:.25s;
 }
 
 .continue:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 14px 40px #6655ff55;
+    transform:translateY(-3px);
 }
 
 .continue:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-  transform:none;
-  box-shadow:none;
+    cursor:not-allowed;
+
+    opacity:.35;
+
+    transform:none;
+
+    box-shadow:none;
 }
 
-.small{
-  text-align:center;
-  color:#59627c;
-  font-size:11px;
-  margin-top:12px;
+.note{
+    color:#66718c;
+
+    font-size:11px;
+
+    line-height:1.5;
+
+    margin-top:13px;
 }
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
-  body{
-    padding:10px;
-  }
+    header{
+        padding:0 16px;
+    }
 
-  .card{
-    max-height:95vh;
-    border-radius:22px;
-  }
+    .back{
+        font-size:12px;
+    }
 
-  .header{
-    padding:22px 20px;
-  }
+    main{
+        padding-top:45px;
+    }
 
-  .content{
-    padding:18px 20px;
-    max-height:57vh;
-  }
+    .emoji{
+        font-size:28px;
+        opacity:.65;
+    }
 
-  .footer{
-    padding:18px 20px 20px;
-  }
+    .progressBox{
+        top:82px;
+    }
 
-  .header h1{
-    font-size:21px;
-  }
+    .rule{
+        padding:21px;
+    }
 
-  .rule{
-    padding:15px;
-  }
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
+<!-- КОСМОС -->
 
-<div class="card">
+<div class="space">
 
-  <div class="header">
+    <div class="stars"></div>
 
-    <div class="logo">
-      ✦
-    </div>
+    <div class="nebula n1"></div>
+    <div class="nebula n2"></div>
+    <div class="nebula n3"></div>
 
-    <div>
-      <h1>Правила GalaxCri</h1>
-      <p>Пожалуйста, ознакомься перед использованием</p>
-    </div>
-
-  </div>
-
-
-  <div class="content">
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">1</div>
-        Уважение к пользователям
-      </div>
-
-      <p>
-        Относись к другим пользователям уважительно.
-        Запрещены травля, преследование, угрозы,
-        унижение и намеренное причинение вреда другим людям.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">2</div>
-        Конфиденциальность
-      </div>
-
-      <p>
-        Не публикуй чужие личные данные без разрешения.
-        Уважай частную жизнь других пользователей
-        и не пытайся получить доступ к чужим аккаунтам.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">3</div>
-        Запрещённый контент
-      </div>
-
-      <p>
-        Не используй GalaxCri для распространения
-        незаконного, опасного или запрещённого контента.
-        Контент также должен соответствовать законам
-        страны пользователя.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">4</div>
-        Спам
-      </div>
-
-      <p>
-        Не отправляй массовые нежелательные сообщения,
-        навязчивую рекламу, вредоносные ссылки
-        и автоматизированный спам.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">5</div>
-        Безопасность аккаунта
-      </div>
-
-      <p>
-        Не передавай пароль другим людям.
-        Не пытайся взломать чужие аккаунты,
-        обойти ограничения или получить доступ
-        к чужой информации.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">6</div>
-        Имя и профиль
-      </div>
-
-      <p>
-        Не выдавай себя за другого человека,
-        официального представителя GalaxCri
-        или другую организацию с целью обмана.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">7</div>
-        Контакты
-      </div>
-
-      <p>
-        Если ты разрешаешь GalaxCri доступ к контактам,
-        разрешение должно использоваться только
-        для функций поиска и добавления знакомых.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">8</div>
-        Возраст и законы
-      </div>
-
-      <p>
-        Использование GalaxCri должно соответствовать
-        возрастным ограничениям и законодательству
-        страны пользователя.
-      </p>
-
-    </div>
-
-
-    <div class="rule">
-
-      <div class="rule-title">
-        <div class="number">9</div>
-        Безопасность сообщества
-      </div>
-
-      <p>
-        Если ты обнаружил серьёзную проблему,
-        подозрительный аккаунт или нарушение правил,
-        используй встроенную функцию жалобы.
-      </p>
-
-    </div>
-
-
-    <div class="notice">
-
-      🛡️ <b>Важно:</b>
-      эти правила являются базовыми правилами
-      использования GalaxCri. В дальнейшем здесь
-      появится полноценная версия пользовательского
-      соглашения и политики конфиденциальности.
-
-    </div>
-
-  </div>
-
-
-  <div class="footer">
-
-    <label class="checkbox">
-
-      <input
-        type="checkbox"
-        id="agree"
-        onchange="updateButton()"
-      >
-
-      <span>
-        Я прочитал правила GalaxCri и согласен
-        соблюдать их при использовании сервиса.
-      </span>
-
-    </label>
-
-
-    <button
-      class="continue"
-      id="continueButton"
-      disabled
-      onclick="continueToApp()"
-    >
-      Продолжить в GalaxCri →
-    </button>
-
-
-    <div class="small">
-      GalaxCri • Preview 1.0
-    </div>
-
-  </div>
+    <div class="emoji e1">🚀</div>
+    <div class="emoji e2">🪐</div>
+    <div class="emoji e3">🌙</div>
+    <div class="emoji e4">☄️</div>
+    <div class="emoji e5">✨</div>
+    <div class="emoji e6">👽</div>
 
 </div>
 
 
+<!-- HEADER -->
+
+<header>
+
+    <div class="brand">
+
+        <div class="logo">
+            ✦
+        </div>
+
+        GalaxCri
+
+    </div>
+
+    <button
+        class="back"
+        onclick="goBack()">
+
+        ← Назад
+
+    </button>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <div class="badge">
+            🌌 Один маленький шаг перед входом
+        </div>
+
+        <h1>
+            Правила
+        </h1>
+
+        <p class="intro">
+
+            Добро пожаловать в GalaxCri.
+            Перед созданием аккаунта ознакомься
+            с основными правилами платформы.
+            Они нужны, чтобы наша галактика
+            оставалась комфортной для всех.
+
+        </p>
+
+    </section>
+
+
+    <!-- ПРОГРЕСС -->
+
+    <div class="progressBox">
+
+        <div class="progressTop">
+
+            <span>
+                📖 Прогресс ознакомления
+            </span>
+
+            <span id="progressText">
+                0%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="progressBar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ПРАВИЛА -->
+
+    <section class="rules" id="rules">
+
+
+        <article class="rule">
+
+            <div class="ruleIcon">
+                🤝
+            </div>
+
+            <h2>
+                1. Уважай других
+            </h2>
+
+            <p>
+                Не оскорбляй, не унижай и не
+                преследуй других пользователей.
+                GalaxCri создан для нормального
+                общения и совместных развлечений.
+            </p>
+
+        </article>
+
+
+        <article class="rule">
+
+            <div class="ruleIcon">
+                🚫
+            </div>
+
+            <h2>
+                2. Запрещённый контент
+            </h2>
+
+            <p>
+                Не публикуй незаконный,
+                опасный или предназначенный
+                исключительно для взрослых
+                контент.
+            </p>
+
+        </article>
+
+
+        <article class="rule">
+
+            <div class="ruleIcon">
+                🔐
+            </div>
+
+            <h2>
+                3. Береги свои данные
+            </h2>
+
+            <p>
+                Никому не передавай пароли,
+                коды подтверждения и другие
+                секретные данные. Команда
+                GalaxCri никогда не попросит
+                твой пароль.
+            </p>
+
+        </article>
+
+
+        <article class="rule">
+
+            <div class="ruleIcon">
+                🕵️
+            </div>
+
+            <h2>
+                4. Не выдавай себя за других
+            </h2>
+
+            <p>
+                Не создавай аккаунты,
+                предназначенные для обмана
+                пользователей или выдачи себя
+                за другого человека.
+            </p>
+
+        </article>
+
+
+        <article class="rule">
+
+            <div class="ruleIcon">
+                📢
+            </div>
+
+            <h2>
+                5. Не спамь
+            </h2>
+
+            <p>
+                Не отправляй огромное количество
+                одинаковых сообщений, рекламы
+                или нежелательных приглашений.
+            </p>
+
+        </article>
+
+
+        <article class="rule">
+
+            <div class="ruleIcon">
+                🛡️
+            </div>
+
+            <h2>
+                6. Не пытайся взломать GalaxCri
+            </h2>
+
+            <p>
+                Не пытайся получить доступ
+                к чужим аккаунтам, украсть
+                данные или нарушить работу
+                платформы.
+            </p>
+
+        </article>
+
+
+        <article class="rule warning">
+
+            <div class="ruleIcon">
+                ⚠️
+            </div>
+
+            <h2>
+                7. Возраст и безопасность
+            </h2>
+
+            <p>
+                Используй GalaxCri только если
+                это разрешено возрастными
+                требованиями сервиса и правилами
+                твоей страны. Если что-то кажется
+                опасным или подозрительным —
+                сообщи взрослому, которому доверяешь.
+            </p>
+
+        </article>
+
+
+        <article class="rule">
+
+            <div class="ruleIcon">
+                🌌
+            </div>
+
+            <h2>
+                8. Главное правило GalaxCri
+            </h2>
+
+            <p>
+                Используй GalaxCri так, чтобы
+                другим людям было комфортно
+                находиться здесь. Будь адекватным,
+                уважительным и не мешай другим
+                наслаждаться общением.
+            </p>
+
+        </article>
+
+
+    </section>
+
+
+    <!-- СОГЛАСИЕ -->
+
+    <section class="agreement">
+
+        <label class="checkRow">
+
+            <input
+                type="checkbox"
+                id="agree"
+                onchange="updateButton()">
+
+            <span>
+                Я прочитал(а) и согласен(на)
+                с правилами GalaxCri
+            </span>
+
+        </label>
+
+
+        <button
+            class="continue"
+            id="continueButton"
+            disabled
+            onclick="continueRegistration()">
+
+            🚀 Я согласен — продолжить
+
+        </button>
+
+
+        <div class="note">
+
+            Нажимая кнопку, ты подтверждаешь,
+            что ознакомился(ась) с правилами GalaxCri.
+
+        </div>
+
+    </section>
+
+</main>
+
+
 <script>
 
-function updateButton(){
+/* =========================
+   АНИМАЦИЯ ПРАВИЛ
+========================= */
 
-  const checkbox =
-    document.getElementById("agree");
+const rules =
+    document.querySelectorAll(".rule");
 
-  const button =
-    document.getElementById("continueButton");
 
-  button.disabled =
-    !checkbox.checked;
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    entry.target
+                        .classList
+                        .add("visible");
+
+                }
+
+            });
+
+        },
+        {
+            threshold:.15
+        }
+    );
+
+
+rules.forEach(rule => {
+
+    observer.observe(rule);
+
+});
+
+
+/* =========================
+   ПРОГРЕСС
+========================= */
+
+function updateProgress(){
+
+    const scrollTop =
+        window.scrollY;
+
+    const max =
+        document.documentElement
+            .scrollHeight -
+        window.innerHeight;
+
+    const percent =
+        max > 0
+        ? Math.min(
+            100,
+            Math.round(
+                scrollTop / max * 100
+            )
+        )
+        : 100;
+
+
+    document
+        .getElementById("progressBar")
+        .style.width =
+            percent + "%";
+
+
+    document
+        .getElementById("progressText")
+        .textContent =
+            percent + "%";
 
 }
 
 
-function continueToApp(){
+window.addEventListener(
+    "scroll",
+    updateProgress
+);
 
-  localStorage.setItem(
-    "galaxcri_rules_accepted",
-    "true"
-  );
+updateProgress();
 
-  window.location.href =
-    "app.html";
+
+/* =========================
+   СОГЛАСИЕ
+========================= */
+
+function updateButton(){
+
+    const checked =
+        document
+            .getElementById("agree")
+            .checked;
+
+    document
+        .getElementById("continueButton")
+        .disabled =
+            !checked;
+
+}
+
+
+/* =========================
+   ПРОДОЛЖЕНИЕ
+========================= */
+
+function continueRegistration(){
+
+    const checked =
+        document
+            .getElementById("agree")
+            .checked;
+
+    if(!checked){
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "galaxcri_rules_accepted",
+        "true"
+    );
+
+
+    /*
+       После правил переходим
+       к подтверждению аккаунта.
+    */
+
+    window.location.href =
+        "verify.html";
+
+}
+
+
+/* =========================
+   НАЗАД
+========================= */
+
+function goBack(){
+
+    window.location.href =
+        "index.html";
 
 }
 
