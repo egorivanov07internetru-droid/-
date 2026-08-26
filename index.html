@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GalaxCri</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GalaxCri — Messenger</title>
 
 <style>
 *{
@@ -12,47 +12,209 @@
     padding:0;
 }
 
-:root{
-    --bg:#060814;
-    --card:#101525;
-    --card2:#151c30;
-    --border:#ffffff12;
-    --text:#ffffff;
-    --muted:#929bb5;
-    --purple:#795cff;
-    --blue:#20d8ff;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
     min-height:100vh;
     font-family:Inter,Arial,sans-serif;
-    color:var(--text);
-    background:
-        radial-gradient(circle at 15% 10%,#704cff44,transparent 35%),
-        radial-gradient(circle at 85% 85%,#00d9ff2e,transparent 35%),
-        var(--bg);
-    overflow:hidden;
+    color:#fff;
+    background:#050713;
+    overflow-x:hidden;
 }
 
-/* Звёзды */
+/* =========================
+   COSMIC BACKGROUND
+========================= */
 
-.stars{
+.space{
     position:fixed;
     inset:0;
+    overflow:hidden;
     pointer-events:none;
-    opacity:.35;
-    background-image:
-        radial-gradient(#fff 1px,transparent 1px),
-        radial-gradient(#fff 1px,transparent 1px);
-    background-size:75px 75px,120px 120px;
-    background-position:0 0,40px 60px;
+    z-index:0;
 }
 
-/* Навигация */
+.nebula{
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.25;
+}
+
+.n1{
+    background:#694cff;
+    left:-300px;
+    top:-250px;
+    animation:nebula1 14s ease-in-out infinite alternate;
+}
+
+.n2{
+    background:#00cfff;
+    right:-350px;
+    bottom:-300px;
+    animation:nebula2 18s ease-in-out infinite alternate;
+}
+
+.n3{
+    background:#ff4fcf;
+    left:35%;
+    top:35%;
+    opacity:.10;
+    animation:nebula3 20s ease-in-out infinite alternate;
+}
+
+@keyframes nebula1{
+    to{
+        transform:translate(170px,100px) scale(1.2);
+    }
+}
+
+@keyframes nebula2{
+    to{
+        transform:translate(-150px,-120px) scale(1.15);
+    }
+}
+
+@keyframes nebula3{
+    to{
+        transform:scale(1.5);
+    }
+}
+
+.stars{
+    position:absolute;
+    inset:-50%;
+    background-image:
+        radial-gradient(#fff 1px,transparent 1px),
+        radial-gradient(#fff 1px,transparent 1px),
+        radial-gradient(#ffffffaa 1px,transparent 1px);
+    background-size:
+        90px 90px,
+        140px 140px,
+        210px 210px;
+    background-position:
+        0 0,
+        40px 70px,
+        90px 20px;
+    animation:starsMove 35s linear infinite;
+}
+
+@keyframes starsMove{
+    to{
+        transform:translate3d(120px,180px,0);
+    }
+}
+
+/* Летающие эмодзи */
+
+.floating{
+    position:fixed;
+    z-index:1;
+    pointer-events:none;
+    user-select:none;
+    font-size:clamp(25px,3vw,45px);
+    filter:drop-shadow(0 0 12px #ffffff55);
+}
+
+.f1{
+    left:5%;
+    top:18%;
+    animation:float1 8s ease-in-out infinite;
+}
+
+.f2{
+    right:7%;
+    top:25%;
+    animation:float2 10s ease-in-out infinite;
+}
+
+.f3{
+    left:12%;
+    top:65%;
+    animation:float3 9s ease-in-out infinite;
+}
+
+.f4{
+    right:13%;
+    top:70%;
+    animation:float4 12s ease-in-out infinite;
+}
+
+.f5{
+    left:46%;
+    top:10%;
+    animation:float5 7s ease-in-out infinite;
+}
+
+.f6{
+    right:30%;
+    top:50%;
+    animation:float6 11s ease-in-out infinite;
+}
+
+.f7{
+    left:2%;
+    top:42%;
+    animation:float7 13s ease-in-out infinite;
+}
+
+.f8{
+    right:2%;
+    top:52%;
+    animation:float8 8s ease-in-out infinite;
+}
+
+@keyframes float1{
+    0%,100%{transform:translate(0,0) rotate(-10deg)}
+    50%{transform:translate(80px,-50px) rotate(15deg)}
+}
+
+@keyframes float2{
+    0%,100%{transform:translate(0,0) rotate(10deg)}
+    50%{transform:translate(-100px,70px) rotate(-15deg)}
+}
+
+@keyframes float3{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(100px,-80px) rotate(20deg)}
+}
+
+@keyframes float4{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-90px,-60px) rotate(-20deg)}
+}
+
+@keyframes float5{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(90px) rotate(180deg)}
+}
+
+@keyframes float6{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-70px,90px)}
+}
+
+@keyframes float7{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(90px,40px) rotate(25deg)}
+}
+
+@keyframes float8{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-80px,-90px) rotate(-25deg)}
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header{
     position:relative;
-    z-index:2;
+    z-index:5;
 
     height:76px;
 
@@ -62,13 +224,16 @@ header{
 
     padding:0 7%;
 
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid #ffffff12;
 
-    background:#080b17cc;
+    background:#060916cc;
     backdrop-filter:blur(20px);
+
+    position:sticky;
+    top:0;
 }
 
-.logoBox{
+.brand{
     display:flex;
     align-items:center;
     gap:12px;
@@ -86,13 +251,24 @@ header{
 
     border-radius:14px;
 
-    background:
-        linear-gradient(135deg,var(--purple),var(--blue));
+    background:linear-gradient(
+        135deg,
+        #795cff,
+        #20d8ff
+    );
 
     box-shadow:
-        0 8px 35px #6955ff66;
+        0 0 30px #725cff66;
 
-    font-size:23px;
+    animation:logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+    50%{
+        box-shadow:
+            0 0 50px #20d8ff88;
+        transform:rotate(5deg);
+    }
 }
 
 .headerButtons{
@@ -102,239 +278,381 @@ header{
 
 button{
     border:0;
-    color:white;
+    color:#fff;
     cursor:pointer;
     font-family:inherit;
     font-weight:750;
-    transition:.2s;
+    transition:.25s;
 }
 
-.loginButton{
+.login{
     padding:11px 18px;
-
     border-radius:12px;
-
     background:#ffffff09;
-    border:1px solid #ffffff15;
+    border:1px solid #ffffff14;
 }
 
-.loginButton:hover{
-    background:#ffffff15;
+.register{
+    padding:11px 18px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#795cff,#20cfff);
+    box-shadow:0 8px 30px #6955ff44;
+}
+
+button:hover{
     transform:translateY(-2px);
 }
 
-.registerButton{
-    padding:11px 18px;
-
-    border-radius:12px;
-
-    background:
-        linear-gradient(135deg,var(--purple),var(--blue));
-
-    box-shadow:
-        0 8px 30px #6955ff44;
-}
-
-.registerButton:hover{
-    transform:translateY(-2px) scale(1.03);
-}
-
-/* Главная */
+/* =========================
+   HERO
+========================= */
 
 main{
     position:relative;
-    z-index:1;
-
-    height:calc(100vh - 76px);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:30px 20px;
-
-    overflow:auto;
+    z-index:2;
 }
 
 .hero{
-    width:min(1000px,100%);
+    min-height:calc(100vh - 76px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     text-align:center;
 
-    animation:heroIn .7s ease;
+    padding:80px 20px 120px;
+}
+
+.heroContent{
+    width:min(1050px,100%);
+
+    animation:heroIn .8s ease;
 }
 
 @keyframes heroIn{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(35px) scale(.97);
     }
-
     to{
         opacity:1;
-        transform:translateY(0);
+        transform:translateY(0) scale(1);
     }
 }
 
 .badge{
     display:inline-flex;
 
-    padding:8px 14px;
+    padding:9px 16px;
 
     border-radius:30px;
 
     background:#ffffff08;
-    border:1px solid #ffffff12;
+    border:1px solid #ffffff15;
 
-    color:#aaa4ff;
+    color:#aaa5ff;
 
-    font-size:13px;
+    backdrop-filter:blur(10px);
 
-    margin-bottom:20px;
+    margin-bottom:25px;
+
+    box-shadow:0 0 30px #705cff18;
 }
 
-h1{
-    font-size:clamp(55px,9vw,100px);
+.hero h1{
+    font-size:clamp(65px,12vw,145px);
 
-    line-height:.9;
+    line-height:.82;
 
-    letter-spacing:-5px;
+    letter-spacing:-8px;
 
-    margin-bottom:24px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #aaa4ff 45%,
-            #62eaff
-        );
+    background:linear-gradient(
+        135deg,
+        #ffffff,
+        #b3aaff 40%,
+        #55eaff 80%
+    );
 
     -webkit-background-clip:text;
     background-clip:text;
 
     color:transparent;
+
+    text-shadow:
+        0 0 80px #7a5cff22;
+
+    margin-bottom:30px;
 }
 
-.description{
-    max-width:650px;
+.subtitle{
+    max-width:700px;
 
     margin:auto;
 
-    color:var(--muted);
+    color:#9ca6c0;
 
-    font-size:18px;
+    font-size:19px;
 
-    line-height:1.65;
+    line-height:1.7;
 }
 
-.mainButtons{
+.heroButtons{
     display:flex;
 
     justify-content:center;
 
     gap:12px;
 
-    margin-top:32px;
-
     flex-wrap:wrap;
+
+    margin-top:38px;
 }
 
-.bigButton{
-    padding:15px 25px;
+.heroButton{
+    padding:16px 26px;
 
-    border-radius:15px;
+    border-radius:16px;
 
     font-size:15px;
 }
 
 .primary{
-    background:
-        linear-gradient(135deg,var(--purple),var(--blue));
+    background:linear-gradient(
+        135deg,
+        #795cff,
+        #20d8ff
+    );
 
     box-shadow:
-        0 12px 40px #6655ff44;
+        0 12px 50px #6955ff55;
 }
 
 .secondary{
-    background:#ffffff09;
-    border:1px solid #ffffff15;
+    background:#ffffff08;
+    border:1px solid #ffffff16;
 }
 
-.bigButton:hover{
-    transform:translateY(-3px);
+.heroButton:hover{
+    transform:translateY(-4px) scale(1.02);
 }
 
-/* Возможности */
+/* =========================
+   DEMO CHAT
+========================= */
+
+.demo{
+    width:min(850px,100%);
+
+    margin:70px auto 0;
+
+    padding:18px;
+
+    border-radius:25px;
+
+    background:#0c1120cc;
+
+    border:1px solid #ffffff13;
+
+    box-shadow:
+        0 30px 100px #00000066,
+        0 0 80px #6955ff12;
+
+    backdrop-filter:blur(25px);
+
+    text-align:left;
+
+    transform:perspective(1000px) rotateX(4deg);
+
+    transition:.4s;
+}
+
+.demo:hover{
+    transform:
+        perspective(1000px)
+        rotateX(0deg)
+        translateY(-5px);
+}
+
+.demoTop{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:7px 10px 15px;
+
+    border-bottom:1px solid #ffffff0d;
+}
+
+.demoAvatar{
+    width:40px;
+    height:40px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:13px;
+
+    background:linear-gradient(135deg,#795cff,#20d8ff);
+}
+
+.demoName{
+    font-weight:800;
+}
+
+.online{
+    color:#55e59a;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.demoMessages{
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.message{
+    max-width:70%;
+
+    padding:11px 14px;
+
+    border-radius:15px;
+
+    background:#1a2238;
+
+    color:#dce2f3;
+
+    animation:messageFloat 4s ease-in-out infinite;
+}
+
+.message.me{
+    align-self:flex-end;
+
+    background:#5d48cc;
+}
+
+@keyframes messageFloat{
+    50%{
+        transform:translateY(-3px);
+    }
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.featuresSection{
+    padding:110px 20px;
+
+    position:relative;
+}
+
+.sectionTitle{
+    text-align:center;
+
+    font-size:42px;
+
+    margin-bottom:15px;
+}
+
+.sectionText{
+    text-align:center;
+
+    color:#8d97b1;
+
+    margin-bottom:50px;
+}
 
 .features{
+    width:min(1050px,100%);
+
+    margin:auto;
+
     display:grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+        repeat(3,1fr);
 
-    gap:12px;
-
-    margin-top:55px;
+    gap:15px;
 }
 
 .feature{
-    text-align:left;
+    padding:25px;
 
-    padding:20px;
+    min-height:190px;
 
-    border-radius:19px;
+    border-radius:22px;
 
     background:#ffffff07;
 
-    border:1px solid #ffffff0d;
+    border:1px solid #ffffff10;
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:blur(20px);
 
-    transition:.25s;
+    transition:.3s;
 }
 
 .feature:hover{
-    transform:translateY(-5px);
+    transform:translateY(-8px);
 
     background:#ffffff0c;
 
-    border-color:#ffffff1c;
+    border-color:#ffffff22;
+
+    box-shadow:
+        0 20px 50px #00000044;
 }
 
-.icon{
-    font-size:27px;
+.featureIcon{
+    font-size:35px;
 
-    margin-bottom:12px;
+    margin-bottom:15px;
 }
 
 .feature h3{
-    margin-bottom:7px;
+    margin-bottom:9px;
 }
 
 .feature p{
-    color:#858fa9;
+    color:#8993ad;
 
-    font-size:13px;
+    line-height:1.6;
 
-    line-height:1.5;
+    font-size:14px;
 }
 
-.version{
-    color:#515b75;
+/* =========================
+   FOOTER
+========================= */
 
-    font-size:11px;
+footer{
+    position:relative;
+    z-index:2;
 
-    margin-top:25px;
+    text-align:center;
+
+    padding:35px;
+
+    border-top:1px solid #ffffff0d;
+
+    color:#59637c;
+
+    font-size:12px;
 }
 
-/* Модальное окно */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
     position:fixed;
 
     inset:0;
 
-    z-index:10;
+    z-index:100;
 
     display:none;
 
@@ -343,9 +661,9 @@ h1{
 
     padding:20px;
 
-    background:#000000aa;
+    background:#000000b8;
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:blur(18px);
 }
 
 .modal.active{
@@ -354,48 +672,47 @@ h1{
     animation:fade .2s ease;
 }
 
-@keyframes fade{
-    from{opacity:0}
-    to{opacity:1}
-}
-
 .modalCard{
     width:min(470px,100%);
 
     padding:30px;
 
-    border-radius:26px;
+    border-radius:27px;
 
     background:#111729;
 
-    border:1px solid #ffffff16;
+    border:1px solid #ffffff17;
 
     box-shadow:
-        0 30px 100px #000000aa;
+        0 30px 100px #000;
 
-    animation:modalIn .3s ease;
+    animation:popup .3s ease;
 }
 
-@keyframes modalIn{
-    from{
-        transform:scale(.93) translateY(15px);
-        opacity:0;
-    }
+@keyframes fade{
+    from{opacity:0}
+    to{opacity:1}
+}
 
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:scale(.92) translateY(20px);
+    }
     to{
-        transform:scale(1) translateY(0);
         opacity:1;
+        transform:scale(1) translateY(0);
     }
 }
 
 .modalTop{
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    margin-bottom:20px;
+    align-items:center;
+
+    margin-bottom:18px;
 }
 
 .modalTitle{
@@ -404,60 +721,57 @@ h1{
 }
 
 .close{
-    width:34px;
-    height:34px;
+    width:35px;
+    height:35px;
 
     border-radius:10px;
 
-    background:#ffffff0a;
+    background:#ffffff09;
 
     font-size:20px;
 }
 
 .modalDescription{
-    color:var(--muted);
+    color:#8f99b3;
+
+    line-height:1.5;
 
     font-size:14px;
 
-    line-height:1.55;
-
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
-/* Переключатель */
-
-.methodSwitch{
+.method{
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
     gap:5px;
 
+    background:#080d1a;
+
     padding:5px;
 
+    border-radius:13px;
+
     margin-bottom:15px;
-
-    border-radius:14px;
-
-    background:#080d1b;
 }
 
-.method{
+.method button{
     padding:11px;
 
-    border-radius:10px;
+    border-radius:9px;
 
     background:transparent;
 
-    color:#78839f;
+    color:#77819b;
 }
 
-.method.active{
+.method button.active{
+    color:#fff;
+
     background:#202744;
-    color:white;
 }
-
-/* Поля */
 
 .field{
     width:100%;
@@ -470,50 +784,19 @@ h1{
 
     border:1px solid #ffffff12;
 
+    background:#080d1a;
+
+    color:#fff;
+
     outline:none;
-
-    background:#080d1b;
-
-    color:white;
-
-    font-size:14px;
 }
 
 .field:focus{
-    border-color:#765cff;
+    border-color:#755cff;
 
     box-shadow:
-        0 0 0 3px #765cff22;
+        0 0 0 3px #755cff22;
 }
-
-.field::placeholder{
-    color:#59637e;
-}
-
-.passwordWrap{
-    position:relative;
-}
-
-.showPassword{
-    position:absolute;
-
-    right:7px;
-    top:7px;
-
-    height:40px;
-
-    padding:0 10px;
-
-    background:#ffffff08;
-
-    border-radius:9px;
-
-    color:#8993ad;
-
-    font-size:12px;
-}
-
-/* Основная кнопка */
 
 .submit{
     width:100%;
@@ -522,23 +805,19 @@ h1{
 
     border-radius:13px;
 
-    margin-top:4px;
+    background:linear-gradient(
+        135deg,
+        #795cff,
+        #20d8ff
+    );
 
-    background:
-        linear-gradient(135deg,var(--purple),var(--blue));
-
-    box-shadow:
-        0 10px 30px #6655ff33;
+    margin-top:5px;
 }
 
-.submit:hover{
-    transform:translateY(-2px);
-}
-
-.bottomText{
+.modalBottom{
     text-align:center;
 
-    color:#7f89a4;
+    color:#7f89a2;
 
     font-size:13px;
 
@@ -546,20 +825,14 @@ h1{
 }
 
 .link{
-    color:#9484ff;
+    color:#9685ff;
 
     cursor:pointer;
 }
 
-.error{
-    min-height:18px;
-
-    color:#ff6d8a;
-
-    font-size:12px;
-
-    margin-bottom:5px;
-}
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:800px){
 
@@ -570,48 +843,50 @@ h1{
     .features{
         grid-template-columns:1fr 1fr;
     }
+
+    .floating{
+        opacity:.7;
+    }
+
 }
 
 @media(max-width:560px){
-
-    body{
-        overflow:auto;
-    }
 
     header{
         height:68px;
     }
 
-    main{
-        min-height:calc(100vh - 68px);
-        height:auto;
-        padding:55px 15px;
-    }
-
-    .headerButtons .loginButton{
+    .headerButtons .login{
         display:none;
     }
 
-    h1{
-        font-size:64px;
-        letter-spacing:-3px;
+    .hero{
+        padding-top:65px;
     }
 
-    .description{
-        font-size:15px;
+    .hero h1{
+        font-size:70px;
+        letter-spacing:-4px;
+    }
+
+    .subtitle{
+        font-size:16px;
     }
 
     .features{
         grid-template-columns:1fr;
-        margin-top:45px;
     }
 
-    .feature{
-        text-align:center;
+    .message{
+        max-width:85%;
     }
 
-    .modalCard{
-        padding:23px;
+    .demo{
+        transform:none;
+    }
+
+    .sectionTitle{
+        font-size:32px;
     }
 }
 </style>
@@ -619,21 +894,843 @@ h1{
 
 <body>
 
-<div class="stars"></div>
+<!-- КОСМОС -->
+
+<div class="space">
+
+    <div class="nebula n1"></div>
+    <div class="nebula n2"></div>
+    <div class="nebula n3"></div>
+
+    <div class="stars"></div>
+
+    <div class="floating f1">🚀</div>
+    <div class="floating f2">🪐</div>
+    <div class="floating f3">🌙</div>
+    <div class="floating f4">☄️</div>
+    <div class="floating f5">✨</div>
+    <div class="floating f6">🛰️</div>
+    <div class="floating f7">👽</div>
+    <div class="floating f8">🌌</div>
+
+</div>
+
+
+<!-- HEADER -->
 
 <header>
 
-    <div class="logoBox">
-        <div class="logo">✦</div>
+    <div class="brand">
+
+        <div class="logo">
+            ✦
+        </div>
+
         GalaxCri
+
     </div>
+
 
     <div class="headerButtons">
 
         <button
-            class="loginButton"
+            class="login"
             onclick="openLogin()">
+
             Войти
+
         </button>
 
+
         <button
+            class="register"
+            onclick="openRegister()">
+
+            Регистрация
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main>
+
+<section class="hero">
+
+<div class="heroContent">
+
+    <div class="badge">
+        🌌 Добро пожаловать в GalaxCri
+    </div>
+
+
+    <h1>
+        GalaxCri
+    </h1>
+
+
+    <p class="subtitle">
+
+        💬 Общайся. 👥 Находи друзей.
+        📢 Создавай сообщества.
+        🚀 Всё необходимое для общения
+        теперь находится в одной галактике.
+
+    </p>
+
+
+    <div class="heroButtons">
+
+        <button
+            class="heroButton primary"
+            onclick="openRegister()">
+
+            🚀 Создать аккаунт
+
+        </button>
+
+
+        <button
+            class="heroButton secondary"
+            onclick="openLogin()">
+
+            🔐 Войти
+
+        </button>
+
+    </div>
+
+
+    <!-- ДЕМО ЧАТ -->
+
+    <div class="demo">
+
+        <div class="demoTop">
+
+            <div class="demoAvatar">
+                🤖
+            </div>
+
+            <div>
+
+                <div class="demoName">
+                    GalaxBot
+                </div>
+
+                <div class="online">
+                    ● онлайн
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="demoMessages">
+
+            <div class="message">
+                👋 Привет! Добро пожаловать
+                в GalaxCri!
+            </div>
+
+
+            <div class="message me">
+                🚀 Вау, интерфейс выглядит
+                космически!
+            </div>
+
+
+            <div class="message">
+                🌌 Мы только начинаем.
+                Впереди ещё много функций!
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="featuresSection">
+
+    <h2 class="sectionTitle">
+        🚀 Целая галактика возможностей
+    </h2>
+
+    <p class="sectionText">
+        GalaxCri создаётся как место,
+        где удобно общаться каждый день.
+    </p>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="featureIcon">
+                💬
+            </div>
+
+            <h3>
+                Мессенджер
+            </h3>
+
+            <p>
+                Личные сообщения, группы,
+                реакции, ответы, пересылка
+                и многое другое.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="featureIcon">
+                👥
+            </div>
+
+            <h3>
+                Контакты
+            </h3>
+
+            <p>
+                Находи знакомых по номеру,
+                электронной почте или
+                username.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="featureIcon">
+                📢
+            </div>
+
+            <h3>
+                Каналы
+            </h3>
+
+            <p>
+                Создавай собственные
+                каналы, сообщества
+                и публикуй посты.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="featureIcon">
+                📞
+            </div>
+
+            <h3>
+                Звонки
+            </h3>
+
+            <p>
+                В будущем GalaxCri получит
+                голосовые и видеозвонки.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="featureIcon">
+                🔒
+            </div>
+
+            <h3>
+                Приватность
+            </h3>
+
+            <p>
+                Настройки конфиденциальности
+                и управление тем, кто может
+                связываться с тобой.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="featureIcon">
+                🤖
+            </div>
+
+            <h3>
+                GalaxBot
+            </h3>
+
+            <p>
+                Официальный бот GalaxCri
+                для помощи пользователям.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    ✦ GalaxCri • Preview 1.2 •
+    Made for the Galaxy 🌌
+
+</footer>
+
+
+<!-- LOGIN MODAL -->
+
+<div
+    class="modal"
+    id="loginModal">
+
+<div class="modalCard">
+
+    <div class="modalTop">
+
+        <div class="modalTitle">
+            🔐 Вход
+        </div>
+
+        <button
+            class="close"
+            onclick="closeModals()">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div class="modalDescription">
+
+        Войди в GalaxCri по электронной
+        почте или номеру телефона.
+
+    </div>
+
+
+    <div class="method">
+
+        <button
+            id="loginEmail"
+            class="active"
+            onclick="loginMethod('email')">
+
+            📧 Почта
+
+        </button>
+
+
+        <button
+            id="loginPhone"
+            onclick="loginMethod('phone')">
+
+            📱 Телефон
+
+        </button>
+
+    </div>
+
+
+    <input
+        class="field"
+        id="loginIdentity"
+        placeholder="Электронная почта">
+
+
+    <input
+        class="field"
+        id="loginPassword"
+        type="password"
+        placeholder="Пароль">
+
+
+    <button
+        class="submit"
+        onclick="login()">
+
+        🚀 Войти
+
+    </button>
+
+
+    <div class="modalBottom">
+
+        Нет аккаунта?
+
+        <span
+            class="link"
+            onclick="switchRegister()">
+
+            Создать
+
+        </span>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- REGISTER MODAL -->
+
+<div
+    class="modal"
+    id="registerModal">
+
+<div class="modalCard">
+
+    <div class="modalTop">
+
+        <div class="modalTitle">
+            🚀 Регистрация
+        </div>
+
+        <button
+            class="close"
+            onclick="closeModals()">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div class="modalDescription">
+
+        Выбери способ регистрации.
+        На следующем этапе будет
+        подтверждение кодом.
+
+    </div>
+
+
+    <div class="method">
+
+        <button
+            id="registerEmail"
+            class="active"
+            onclick="registerMethod('email')">
+
+            📧 Почта
+
+        </button>
+
+
+        <button
+            id="registerPhone"
+            onclick="registerMethod('phone')">
+
+            📱 Телефон
+
+        </button>
+
+    </div>
+
+
+    <input
+        class="field"
+        id="registerIdentity"
+        placeholder="Электронная почта">
+
+
+    <input
+        class="field"
+        id="registerUsername"
+        placeholder="@username">
+
+
+    <input
+        class="field"
+        id="registerPassword"
+        type="password"
+        placeholder="Пароль">
+
+
+    <button
+        class="submit"
+        onclick="register()">
+
+        ✨ Продолжить
+
+    </button>
+
+
+    <div class="modalBottom">
+
+        Уже есть аккаунт?
+
+        <span
+            class="link"
+            onclick="switchLogin()">
+
+            Войти
+
+        </span>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   MODALS
+========================= */
+
+function openLogin(){
+
+    document
+        .getElementById("registerModal")
+        .classList.remove("active");
+
+    document
+        .getElementById("loginModal")
+        .classList.add("active");
+
+}
+
+
+function openRegister(){
+
+    document
+        .getElementById("loginModal")
+        .classList.remove("active");
+
+    document
+        .getElementById("registerModal")
+        .classList.add("active");
+
+}
+
+
+function closeModals(){
+
+    document
+        .querySelectorAll(".modal")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
+
+}
+
+
+function switchRegister(){
+
+    closeModals();
+
+    openRegister();
+
+}
+
+
+function switchLogin(){
+
+    closeModals();
+
+    openLogin();
+
+}
+
+
+/* =========================
+   METHODS
+========================= */
+
+let currentRegisterMethod="email";
+let currentLoginMethod="email";
+
+
+function registerMethod(method){
+
+    currentRegisterMethod=method;
+
+    document
+        .getElementById("registerEmail")
+        .classList.toggle(
+            "active",
+            method==="email"
+        );
+
+    document
+        .getElementById("registerPhone")
+        .classList.toggle(
+            "active",
+            method==="phone"
+        );
+
+
+    document
+        .getElementById("registerIdentity")
+        .placeholder =
+            method==="email"
+                ? "Электронная почта"
+                : "+49 123 456789";
+
+}
+
+
+function loginMethod(method){
+
+    currentLoginMethod=method;
+
+    document
+        .getElementById("loginEmail")
+        .classList.toggle(
+            "active",
+            method==="email"
+        );
+
+    document
+        .getElementById("loginPhone")
+        .classList.toggle(
+            "active",
+            method==="phone"
+        );
+
+
+    document
+        .getElementById("loginIdentity")
+        .placeholder =
+            method==="email"
+                ? "Электронная почта"
+                : "+49 123 456789";
+
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+function register(){
+
+    const identity=
+        document
+            .getElementById("registerIdentity")
+            .value
+            .trim();
+
+    const username=
+        document
+            .getElementById("registerUsername")
+            .value
+            .trim();
+
+    const password=
+        document
+            .getElementById("registerPassword")
+            .value;
+
+
+    if(!identity){
+
+        alert(
+            currentRegisterMethod==="email"
+            ? "Введите электронную почту 📧"
+            : "Введите номер телефона 📱"
+        );
+
+        return;
+
+    }
+
+
+    if(username.length<3){
+
+        alert(
+            "Username должен содержать минимум 3 символа."
+        );
+
+        return;
+
+    }
+
+
+    if(password.length<6){
+
+        alert(
+            "Пароль должен содержать минимум 6 символов."
+        );
+
+        return;
+
+    }
+
+
+    const account={
+
+        identity:identity,
+
+        username:
+            username.startsWith("@")
+            ? username
+            : "@"+username,
+
+        method:currentRegisterMethod,
+
+        created:Date.now()
+
+    };
+
+
+    localStorage.setItem(
+        "galaxcri_pending_account",
+        JSON.stringify(account)
+    );
+
+
+    /*
+       Настоящую отправку кода подключим
+       после добавления backend/auth-сервиса.
+    */
+
+    window.location.href="verify.html";
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+    const identity=
+        document
+            .getElementById("loginIdentity")
+            .value
+            .trim();
+
+    const password=
+        document
+            .getElementById("loginPassword")
+            .value;
+
+
+    if(!identity || !password){
+
+        alert(
+            "Заполни данные для входа 🔐"
+        );
+
+        return;
+
+    }
+
+
+    const account=
+        JSON.parse(
+            localStorage.getItem(
+                "galaxcri_account"
+            )
+        );
+
+
+    if(!account){
+
+        alert(
+            "Аккаунт не найден. Сначала зарегистрируйся 🚀"
+        );
+
+        return;
+
+    }
+
+
+    if(account.identity!==identity){
+
+        alert(
+            "Неверная почта или номер телефона."
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "galaxcri_logged",
+        "true"
+    );
+
+
+    window.location.href="app.html";
+
+}
+
+
+/* =========================
+   CLOSE BACKGROUND
+========================= */
+
+document
+    .querySelectorAll(".modal")
+    .forEach(modal=>{
+
+        modal.addEventListener(
+            "click",
+            event=>{
+
+                if(event.target===modal){
+
+                    closeModals();
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================
+   ESC
+========================= */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(event.key==="Escape"){
+
+            closeModals();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+    </html>
